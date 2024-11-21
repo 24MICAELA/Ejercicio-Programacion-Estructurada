@@ -10,4 +10,6 @@ add_executable(Ejercicio_Programacion_Estructurada
     estudiante/estudiante.c
     estudiante/estudiante.h
     main.c
-    main.h)
+    main.h
+        lista/lista.c
+        lista/lista.h)
