@@ -1,31 +1,29 @@
+#include "lista.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "lista.h"
 
-struct ListaEstudiantes crearLista() {
-    struct ListaEstudiantes lista;
-    lista.cabeza = NULL;
-    return lista;
+void inicializarLista(struct ListaEstudiantes *lista) {
+    lista->inicio = NULL;
 }
 
 void agregarEstudiante(struct ListaEstudiantes *lista, const char *nombre, int edad, float promedio) {
-    struct Nodo *nuevoNodo = (struct Nodo *) malloc(sizeof(struct Nodo));
+    struct Nodo *nuevoNodo = (struct Nodo *)malloc(sizeof(struct Nodo));
     agregarEstudiante(&nuevoNodo->estudiante, nombre, edad, promedio);
-    nuevoNodo->siguiente = lista->cabeza;
-    lista->cabeza = nuevoNodo;
+    nuevoNodo->siguiente = lista->inicio;
+    lista->inicio = nuevoNodo;
 }
 
 void imprimirLista(struct ListaEstudiantes lista) {
-    struct Nodo *actual = lista.cabeza;
+    struct Nodo *actual = lista.inicio;
     while (actual != NULL) {
-        imprimirEstudiante(&actual->estudiante);
+        printf("Nombre: %s, Edad: %d, Promedio: %.2f\n", actual->estudiante.nombre, actual->estudiante.edad, actual->estudiante.promedio);
         actual = actual->siguiente;
     }
 }
 
 void eliminarEstudiante(struct ListaEstudiantes *lista, const char *nombre) {
-    struct Nodo *actual = lista->cabeza;
+    struct Nodo *actual = lista->inicio;
     struct Nodo *anterior = NULL;
 
     while (actual != NULL && strcmp(actual->estudiante.nombre, nombre) != 0) {
@@ -34,12 +32,11 @@ void eliminarEstudiante(struct ListaEstudiantes *lista, const char *nombre) {
     }
 
     if (actual == NULL) {
-        printf("Estudiante no encontrado.\n");
-        return;
+        return; // Estudiante no encontrado
     }
 
     if (anterior == NULL) {
-        lista->cabeza = actual->siguiente;
+        lista->inicio = actual->siguiente;
     } else {
         anterior->siguiente = actual->siguiente;
     }
@@ -48,11 +45,15 @@ void eliminarEstudiante(struct ListaEstudiantes *lista, const char *nombre) {
 }
 
 void liberarLista(struct ListaEstudiantes *lista) {
-    struct Nodo *actual = lista->cabeza;
+    struct Nodo *actual = lista->inicio;
+    struct Nodo *temp;
+
     while (actual != NULL) {
-        struct Nodo *temp = actual;
+        temp = actual;
         actual = actual->siguiente;
         free(temp);
     }
-    lista->cabeza = NULL;
+
+    lista->inicio = NULL;
 }
+
