@@ -7,9 +7,9 @@ void inicializarLista(struct ListaEstudiantes *lista) {
     lista->inicio = NULL;
 }
 
-void agregarEstudiante(struct ListaEstudiantes *lista, const char *nombre, int edad, float promedio) {
+void agregarEstudianteALista(struct ListaEstudiantes *lista, const char *nombre, int edad, float promedio) {
     struct Nodo *nuevoNodo = (struct Nodo *)malloc(sizeof(struct Nodo));
-    agregarEstudiante(&nuevoNodo->estudiante, nombre, edad, promedio);
+    agregarEstudiante(&nuevoNodo->estudiante, nombre, edad, promedio);  // Esta sigue usando la función de estudiante
     nuevoNodo->siguiente = lista->inicio;
     lista->inicio = nuevoNodo;
 }

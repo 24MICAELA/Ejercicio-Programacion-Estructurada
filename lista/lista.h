@@ -13,7 +13,7 @@ struct ListaEstudiantes {
 };
 
 void inicializarLista(struct ListaEstudiantes *lista);
-void agregarEstudiante(struct ListaEstudiantes *lista, const char *nombre, int edad, float promedio);
+void agregarEstudianteALista(struct ListaEstudiantes *lista, const char *nombre, int edad, float promedio); // Renombrado
 void imprimirLista(struct ListaEstudiantes lista);
 void eliminarEstudiante(struct ListaEstudiantes *lista, const char *nombre);
 void liberarLista(struct ListaEstudiantes *lista);
